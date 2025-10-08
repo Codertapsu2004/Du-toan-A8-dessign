@@ -8,14 +8,17 @@
   <script defer src="script.js"></script>
 </head>
 <body>
+  <!-- ====================== HEADER ====================== -->
   <header class="header">
     <img src="assets/logo.png" alt="A8 Design Logo" class="logo" />
     <h1>CÔNG CỤ DỰ TOÁN A8 DESIGN</h1>
   </header>
 
+  <!-- ====================== MAIN CONTENT ====================== -->
   <main class="container">
     <div class="main-grid">
-      <!-- THÔNG TIN DỰ ÁN -->
+      
+      <!-- ===== CỘT TRÁI: FORM ===== -->
       <section id="form-section" class="card">
         <h2>Thông tin dự án</h2>
         <hr />
@@ -35,7 +38,7 @@
           <input type="number" id="dienTich" placeholder="Nhập diện tích..." />
         </div>
 
-        <!-- ================== NỘI THẤT ================== -->
+        <!-- ========== NỘI THẤT ========== -->
         <div id="groupNoiThat" class="group">
           <div class="form-group">
             <label>Chất lượng</label>
@@ -47,7 +50,7 @@
           </div>
 
           <div class="form-group">
-            <label>Phong cách (theo chất lượng)</label>
+            <label>Phong cách</label>
             <select id="phongCach">
               <option value="">-- Chọn phong cách --</option>
             </select>
@@ -63,7 +66,7 @@
           </div>
         </div>
 
-        <!-- ================== KIẾN TRÚC ================== -->
+        <!-- ========== KIẾN TRÚC ========== -->
         <div id="groupKienTruc" class="group">
           <div class="form-group">
             <label>Loại công trình</label>
@@ -104,7 +107,7 @@
           </div>
         </div>
 
-        <!-- ================== VIDEO 3D ================== -->
+        <!-- ========== VIDEO 3D ========== -->
         <div id="groupVideo3D" class="group">
           <h3>Dịch vụ tùy chọn</h3>
           <label><input type="checkbox" id="video3D" /> Diễn họa video phim 3D</label>
@@ -113,7 +116,7 @@
         <label><input type="checkbox" id="uuDai" /> Thanh toán trước 100% (Ưu đãi 10%)</label>
       </section>
 
-      <!-- KẾT QUẢ DỰ TOÁN -->
+      <!-- ===== CỘT PHẢI: KẾT QUẢ ===== -->
       <section id="result-section" class="card">
         <h2>Kết quả dự toán</h2>
         <hr />
@@ -124,6 +127,7 @@
     </div>
   </main>
 
+  <!-- ====================== FOOTER ====================== -->
   <footer class="footer">
     <p>© 2025 A8 Design. All rights reserved.</p>
   </footer>
