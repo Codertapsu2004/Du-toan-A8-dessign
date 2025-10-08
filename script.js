@@ -1,23 +1,30 @@
-// ================== DỮ LIỆU GIÁ ==================
 const data = {
   noiThat: {
-    "Nội thất - MEDIUM - Mặc định": { dienHoa: 70, sanXuat: 30, tranTuongSan: 25 },
-    "Nội thất - HIGH - Hiện đại cao cấp": { dienHoa: 85, sanXuat: 30, tranTuongSan: 25 },
-    "Nội thất - HIGH - Color block": { dienHoa: 90, sanXuat: 35, tranTuongSan: 30 },
-    "Nội thất - HIGH - Scandinavian": { dienHoa: 90, sanXuat: 35, tranTuongSan: 30 },
-    "Nội thất - HIGH - Neoclassic": { dienHoa: 90, sanXuat: 35, tranTuongSan: 30 },
-    "Nội thất - HIGH - Tropical": { dienHoa: 85, sanXuat: 30, tranTuongSan: 25 },
-    "Nội thất - HIGH - Industrial": { dienHoa: 85, sanXuat: 30, tranTuongSan: 25 },
-    "Nội thất - HIGH - Đồng Gia": { dienHoa: 90, sanXuat: 35, tranTuongSan: 30 },
-    "Nội thất - HIGH - Midcentury": { dienHoa: 85, sanXuat: 30, tranTuongSan: 25 },
-    "Nội thất - HIGH - Luxury": { dienHoa: 100, sanXuat: 40, tranTuongSan: 30 }
+    // Medium Quality
+    "Nội thất - MEDIUM - Văn phòng hiện đại": { dienHoa: 70, sanXuat: 30, tranTuongSan: 25, dienNuoc: 15, dieuHoa: 5 },
+    "Nội thất - MEDIUM - Hiện đại cao cấp": { dienHoa: 75, sanXuat: 35, tranTuongSan: 30, dienNuoc: 15, dieuHoa: 5 },
+
+    // High Quality
+    "Nội thất - HIGH - Color block": { dienHoa: 85, sanXuat: 30, tranTuongSan: 30, dienNuoc: 15, dieuHoa: 5 },
+    "Nội thất - HIGH - Tropical": { dienHoa: 85, sanXuat: 30, tranTuongSan: 30, dienNuoc: 15, dieuHoa: 5 },
+    "Nội thất - HIGH - Đồng Gia": { dienHoa: 85, sanXuat: 30, tranTuongSan: 30, dienNuoc: 15, dieuHoa: 5 },
+    "Nội thất - HIGH - Scandinavian": { dienHoa: 90, sanXuat: 35, tranTuongSan: 30, dienNuoc: 15, dieuHoa: 5 },
+    "Nội thất - HIGH - Industrial": { dienHoa: 90, sanXuat: 35, tranTuongSan: 30, dienNuoc: 15, dieuHoa: 5 },
+    "Nội thất - HIGH - Midcentury": { dienHoa: 90, sanXuat: 35, tranTuongSan: 30, dienNuoc: 15, dieuHoa: 5 },
+    "Nội thất - HIGH - Neoclassic": { dienHoa: 95, sanXuat: 35, tranTuongSan: 35, dienNuoc: 15, dieuHoa: 5 },
+    "Nội thất - HIGH - Contemporary": { dienHoa: 95, sanXuat: 35, tranTuongSan: 35, dienNuoc: 15, dieuHoa: 5 },
+    "Nội thất - HIGH - Luxury": { dienHoa: 100, sanXuat: 40, tranTuongSan: 35, dienNuoc: 15, dieuHoa: 5 }
   },
+
   kienTruc: {
-    "Kiến trúc - Nhà phố - Hiện đại - 1 mặt tiền - 1-3 tầng": { dienHoa: 4000, kienTruc: 30, ketCau: 15, dienNuoc: 15 },
-    "Kiến trúc - Nhà phố - Hiện đại - 1 mặt tiền - 4-5 tầng": { dienHoa: 5000, kienTruc: 30, ketCau: 15, dienNuoc: 15 },
-    "Kiến trúc - Biệt thự - Hiện đại": { dienHoa: 45, kienTruc: 35, ketCau: 20, dienNuoc: 20 },
-    "Kiến trúc - Biệt thự - Tân cổ điển": { dienHoa: 45, kienTruc: 40, ketCau: 20, dienNuoc: 20 }
+    "Kiến trúc - Nhà phố - Hiện đại - 1 mặt tiền - 1-3 tầng": { dienHoa: 4000, kienTruc: 35, ketCau: 15, dienNuoc: 15, dieuHoa: 5 },
+    "Kiến trúc - Nhà phố - Hiện đại - 2 mặt tiền - 1-3 tầng": { dienHoa: 5000, kienTruc: 35, ketCau: 15, dienNuoc: 15, dieuHoa: 5 },
+    "Kiến trúc - Nhà phố - Tân cổ điển - 1 mặt tiền - 1-3 tầng": { dienHoa: "Liên hệ", kienTruc: 40, ketCau: 15, dienNuoc: 15, dieuHoa: 5 },
+    "Kiến trúc - Nhà phố - Tân cổ điển - 2 mặt tiền - 1-3 tầng": { dienHoa: "Liên hệ", kienTruc: 40, ketCau: 15, dienNuoc: 15, dieuHoa: 5 },
+    "Kiến trúc - Biệt thự - Hiện đại": { dienHoa: 45, kienTruc: 35, ketCau: 20, dienNuoc: 15, dieuHoa: 5 },
+    "Kiến trúc - Biệt thự - Tân cổ điển": { dienHoa: 45, kienTruc: 40, ketCau: 20, dienNuoc: 15, dieuHoa: 5 }
   },
+
   video3D: [
     { min: 0, price: 299 },
     { min: 30, price: 499 },
@@ -28,7 +35,7 @@ const data = {
   ]
 };
 
-// ============== ẨN/HIỆN NHÓM ==============
+// Ẩn/hiện nhóm chọn theo loại dự án
 const groups = {
   noithat: document.getElementById("groupNoiThat"),
   kientruc: document.getElementById("groupKienTruc"),
@@ -37,77 +44,64 @@ const groups = {
 Object.values(groups).forEach(g => (g.style.display = "none"));
 
 document.getElementById("loaiDuAn").addEventListener("change", e => {
-  const v = e.target.value;
   Object.values(groups).forEach(g => (g.style.display = "none"));
-  if (v && groups[v]) groups[v].style.display = "block";
+  const val = e.target.value;
+  if (val && groups[val]) groups[val].style.display = "block";
   updatePhongCach();
   calcEstimate();
 });
 
-// ============== CẬP NHẬT PHONG CÁCH NỘI THẤT ==============
 function updatePhongCach() {
   const chatLuong = document.getElementById("chatLuong").value;
   const phongCach = document.getElementById("phongCach");
   phongCach.innerHTML = "<option value=''>-- Chọn phong cách --</option>";
-
   if (chatLuong === "MEDIUM") {
-    phongCach.innerHTML += `<option value="Mặc định">Mặc định</option>`;
+    phongCach.innerHTML += `<option value="Văn phòng hiện đại">Văn phòng hiện đại</option>`;
+    phongCach.innerHTML += `<option value="Hiện đại cao cấp">Hiện đại cao cấp</option>`;
   } else if (chatLuong === "HIGH") {
-    const list = [
-      "Hiện đại cao cấp",
-      "Color block",
-      "Scandinavian",
-      "Neoclassic",
-      "Tropical",
-      "Industrial",
-      "Đồng Gia",
-      "Midcentury",
-      "Luxury"
-    ];
-    list.forEach(pc => (phongCach.innerHTML += `<option value="${pc}">${pc}</option>`));
+    const list = ["Color block","Tropical","Đồng Gia","Scandinavian","Industrial","Midcentury","Neoclassic","Contemporary","Luxury"];
+    list.forEach(pc => phongCach.innerHTML += `<option value="${pc}">${pc}</option>`);
   }
 }
-document.getElementById("chatLuong").addEventListener("change", updatePhongCach);
 
-// ============== TÍNH TOÁN ==============
-const allInputs = document.querySelectorAll("input, select");
-allInputs.forEach(el => el.addEventListener("change", calcEstimate));
-document.getElementById("dienTich").addEventListener("input", calcEstimate);
+document.querySelectorAll("input, select").forEach(el => {
+  el.addEventListener("input", calcEstimate);
+  el.addEventListener("change", calcEstimate);
+});
 
 function calcEstimate() {
   const loai = document.getElementById("loaiDuAn").value;
   const dienTich = parseFloat(document.getElementById("dienTich").value || 0);
   let tong = 0;
 
-  // Nội thất
   if (loai === "noithat") {
-    const chatLuong = document.getElementById("chatLuong").value;
-    const phongCach = document.getElementById("phongCach").value;
-    const key = `Nội thất - ${chatLuong.toUpperCase()} - ${phongCach}`;
+    const cl = document.getElementById("chatLuong").value;
+    const pc = document.getElementById("phongCach").value;
+    const key = `Nội thất - ${cl} - ${pc}`;
     const item = data.noiThat[key];
     if (!item) return updateResult(0, 0, "0%");
-
     if (document.getElementById("phoiCanh3D").checked) tong += item.dienHoa * dienTich;
     if (document.getElementById("sanXuatNoiThat").checked) tong += item.sanXuat * dienTich;
     if (document.getElementById("tranTuongSan").checked) tong += item.tranTuongSan * dienTich;
+    if (document.getElementById("dienNuoc").checked) tong += item.dienNuoc * dienTich;
+    if (document.getElementById("dieuHoa").checked) tong += item.dieuHoa * dienTich;
   }
 
-  // Kiến trúc
   if (loai === "kientruc") {
     const loaiCT = document.getElementById("loaiCongTrinh").value;
-    const soMatTien = document.getElementById("soMatTien").value;
-    const phongCachKT = document.getElementById("phongCachKT").value;
-    const key = `Kiến trúc - ${loaiCT}${loaiCT === "Nhà phố" ? " - " + phongCachKT + " - " + soMatTien : " - " + phongCachKT}`;
+    const soMat = document.getElementById("soMatTien").value;
+    const pc = document.getElementById("phongCachKT").value;
+    const key = `Kiến trúc - ${loaiCT} - ${pc} - ${soMat}`;
     const item = data.kienTruc[key];
     if (!item) return updateResult(0, 0, "0%");
-
+    if (typeof item.dienHoa === "string") return updateResult("Liên hệ", "Liên hệ", "0%");
     if (document.getElementById("kienTrucPhoiCanh").checked) tong += item.dienHoa;
     if (document.getElementById("kienTrucHS").checked) tong += item.kienTruc;
     if (document.getElementById("ketCau").checked) tong += item.ketCau;
-    if (document.getElementById("dienNuoc").checked) tong += item.dienNuoc;
+    if (document.getElementById("dienKienTruc").checked) tong += item.dienNuoc;
+    if (document.getElementById("dieuHoaKienTruc").checked) tong += item.dieuHoa;
   }
 
-  // Video 3D
   if (loai === "video3d") {
     let item = data.video3D[0];
     for (let i = data.video3D.length - 1; i >= 0; i--) {
@@ -123,7 +117,7 @@ function calcEstimate() {
   }
 
   const uuDai = document.getElementById("uuDai").checked ? 0.9 : 1;
-  const tongCuoi = tong * uuDai;
+  const tongCuoi = typeof tong === "number" ? tong * uuDai : tong;
   const uuDaiText = uuDai < 1 ? "10%" : "0%";
   updateResult(tong, tongCuoi, uuDaiText);
 }
