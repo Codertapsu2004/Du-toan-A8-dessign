@@ -3,22 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Công cụ Dự Toán A8 Design</title>
+  <title>Công cụ Dự toán A8 Design</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f6f0e8;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    header img {
+      width: 48px;
+      height: 48px;
+      margin-right: 16px;
+    }
+    header h1 {
+      font-size: 1.6rem;
+      color: #222;
+      margin: 0;
+      font-weight: 600;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px;
+    }
+    section {
+      background: #fff;
+      padding: 25px 35px;
+      border-radius: 14px;
+      flex: 1;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      max-width: 500px;
+    }
+    h2 {
+      font-size: 1.3rem;
+      border-bottom: 2px solid #c7a97f;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    select, input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      font-size: 0.95rem;
+    }
+    input[type="checkbox"] {
+      margin-right: 5px;
+      transform: scale(1.2);
+    }
+    #result {
+      margin-top: 25px;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+    footer {
+      text-align: center;
+      margin: 25px 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
 </head>
-
 <body>
-  <header class="header">
-    <img src="assets/logo.png" alt="A8 Design Logo" class="logo" />
+  <header>
+    <img src="assets/logo.png" alt="A8 Design Logo" />
     <h1>CÔNG CỤ DỰ TOÁN A8 DESIGN</h1>
   </header>
 
-  <main class="container">
-    <!-- CỘT TRÁI -->
-    <section class="input-section">
+  <main>
+    <section>
       <h2>Thông tin dự án</h2>
-      <hr />
-
       <label for="loaiDuAn">Loại dự án</label>
       <select id="loaiDuAn">
         <option value="">-- Chọn loại --</option>
@@ -39,7 +110,7 @@
           <option value="HIGH">High</option>
         </select>
 
-        <label for="phongCach">Phong cách</label>
+        <label for="phongCach">Phong cách (theo chất lượng)</label>
         <select id="phongCach">
           <option value="">-- Chọn phong cách --</option>
         </select>
@@ -51,12 +122,26 @@
       </div>
 
       <!-- Kiến trúc -->
-      <div id="groupKienTruc" class="group">
+      <div id="groupKienTruc" class="group" style="display:none">
         <label for="loaiCongTrinh">Loại công trình</label>
         <select id="loaiCongTrinh">
           <option value="">-- Chọn loại công trình --</option>
           <option value="Nhà phố">Nhà phố</option>
           <option value="Biệt thự">Biệt thự</option>
+        </select>
+
+        <label for="soMatTien">Số mặt tiền / Số tầng</label>
+        <select id="soMatTien">
+          <option value="">-- Chọn số mặt tiền / tầng --</option>
+          <option value="1 mặt tiền - 1-3 tầng">1 mặt tiền - 1-3 tầng</option>
+          <option value="1 mặt tiền - 4-5 tầng">1 mặt tiền - 4-5 tầng</option>
+        </select>
+
+        <label for="phongCachKT">Phong cách kiến trúc</label>
+        <select id="phongCachKT">
+          <option value="">-- Chọn phong cách --</option>
+          <option value="Hiện đại">Hiện đại</option>
+          <option value="Tân cổ điển">Tân cổ điển</option>
         </select>
 
         <h3>Dịch vụ tùy chọn</h3>
@@ -67,31 +152,23 @@
       </div>
 
       <!-- Video 3D -->
-      <div id="groupVideo3D" class="group">
+      <div id="groupVideo3D" class="group" style="display:none">
         <h3>Dịch vụ tùy chọn</h3>
         <label><input type="checkbox" id="video3D" /> Diễn họa video phim 3D</label>
       </div>
 
-      <div class="discount">
-        <label><input type="checkbox" id="uuDai" /> Thanh toán trước 100% (Ưu đãi 10%)</label>
-      </div>
+      <label><input type="checkbox" id="uuDai" /> Thanh toán trước 100% (Ưu đãi 10%)</label>
     </section>
 
-    <!-- CỘT PHẢI -->
-    <section class="result-section">
+    <section id="result">
       <h2>Kết quả dự toán</h2>
-      <hr />
       <p><strong>Tổng cộng:</strong> <span id="tongCong">0</span> (ngàn VND)</p>
       <p><strong>Ưu đãi:</strong> <span id="uuDaiText">0%</span></p>
       <p><strong>Chi phí cuối:</strong> <span id="tongCuoi">0</span> (ngàn VND)</p>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 A8 Design. All rights reserved.</p>
-  </footer>
-
+  <footer>© 2025 A8 Design. All rights reserved.</footer>
   <script src="script.js"></script>
 </body>
 </html>
-
