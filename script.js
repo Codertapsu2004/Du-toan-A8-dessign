@@ -101,7 +101,7 @@ function calcEstimate() {
   }
 
   if (loai === "video3d") {
-    let item = null;
+    let item = data.video3D[0];
     for (let i = data.video3D.length - 1; i >= 0; i--) {
       if (dienTich >= data.video3D[i].min) {
         item = data.video3D[i];
