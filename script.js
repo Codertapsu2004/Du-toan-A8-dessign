@@ -1,4 +1,4 @@
-// ======================= DỮ LIỆU GIÁ =======================
+// ================== DỮ LIỆU GIÁ ==================
 const data = {
   noiThat: {
     "Nội thất - MEDIUM - Mặc định": { dienHoa: 70, sanXuat: 30, tranTuongSan: 25 },
@@ -13,8 +13,10 @@ const data = {
     "Nội thất - HIGH - Luxury": { dienHoa: 100, sanXuat: 40, tranTuongSan: 30 }
   },
   kienTruc: {
-    "Kiến trúc - Nhà phố": { dienHoa: 4000, kienTruc: 30, ketCau: 15, dienNuoc: 15 },
-    "Kiến trúc - Biệt thự": { dienHoa: 5000, kienTruc: 35, ketCau: 20, dienNuoc: 20 }
+    "Kiến trúc - Nhà phố - Hiện đại - 1 mặt tiền - 1-3 tầng": { dienHoa: 4000, kienTruc: 30, ketCau: 15, dienNuoc: 15 },
+    "Kiến trúc - Nhà phố - Hiện đại - 1 mặt tiền - 4-5 tầng": { dienHoa: 5000, kienTruc: 30, ketCau: 15, dienNuoc: 15 },
+    "Kiến trúc - Biệt thự - Hiện đại": { dienHoa: 45, kienTruc: 35, ketCau: 20, dienNuoc: 20 },
+    "Kiến trúc - Biệt thự - Tân cổ điển": { dienHoa: 45, kienTruc: 40, ketCau: 20, dienNuoc: 20 }
   },
   video3D: [
     { min: 0, price: 299 },
@@ -26,7 +28,7 @@ const data = {
   ]
 };
 
-// ======================= ẨN/HIỆN NHÓM =======================
+// ============== ẨN/HIỆN NHÓM ==============
 const groups = {
   noithat: document.getElementById("groupNoiThat"),
   kientruc: document.getElementById("groupKienTruc"),
@@ -42,7 +44,7 @@ document.getElementById("loaiDuAn").addEventListener("change", e => {
   calcEstimate();
 });
 
-// ======================= CẬP NHẬT PHONG CÁCH =======================
+// ============== CẬP NHẬT PHONG CÁCH NỘI THẤT ==============
 function updatePhongCach() {
   const chatLuong = document.getElementById("chatLuong").value;
   const phongCach = document.getElementById("phongCach");
@@ -67,7 +69,7 @@ function updatePhongCach() {
 }
 document.getElementById("chatLuong").addEventListener("change", updatePhongCach);
 
-// ======================= TÍNH TOÁN =======================
+// ============== TÍNH TOÁN ==============
 const allInputs = document.querySelectorAll("input, select");
 allInputs.forEach(el => el.addEventListener("change", calcEstimate));
 document.getElementById("dienTich").addEventListener("input", calcEstimate);
@@ -77,6 +79,7 @@ function calcEstimate() {
   const dienTich = parseFloat(document.getElementById("dienTich").value || 0);
   let tong = 0;
 
+  // Nội thất
   if (loai === "noithat") {
     const chatLuong = document.getElementById("chatLuong").value;
     const phongCach = document.getElementById("phongCach").value;
@@ -89,9 +92,13 @@ function calcEstimate() {
     if (document.getElementById("tranTuongSan").checked) tong += item.tranTuongSan * dienTich;
   }
 
+  // Kiến trúc
   if (loai === "kientruc") {
     const loaiCT = document.getElementById("loaiCongTrinh").value;
-    const item = data.kienTruc[`Kiến trúc - ${loaiCT}`];
+    const soMatTien = document.getElementById("soMatTien").value;
+    const phongCachKT = document.getElementById("phongCachKT").value;
+    const key = `Kiến trúc - ${loaiCT}${loaiCT === "Nhà phố" ? " - " + phongCachKT + " - " + soMatTien : " - " + phongCachKT}`;
+    const item = data.kienTruc[key];
     if (!item) return updateResult(0, 0, "0%");
 
     if (document.getElementById("kienTrucPhoiCanh").checked) tong += item.dienHoa;
@@ -100,6 +107,7 @@ function calcEstimate() {
     if (document.getElementById("dienNuoc").checked) tong += item.dienNuoc;
   }
 
+  // Video 3D
   if (loai === "video3d") {
     let item = data.video3D[0];
     for (let i = data.video3D.length - 1; i >= 0; i--) {
