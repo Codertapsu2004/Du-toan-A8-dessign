@@ -36,6 +36,7 @@
       justify-content: center;
       gap: 30px;
       padding: 40px;
+      flex-wrap: wrap;
     }
     section {
       background: #fff;
@@ -88,8 +89,10 @@
   </header>
 
   <main>
+    <!-- Cột trái: Thông tin dự án -->
     <section>
       <h2>Thông tin dự án</h2>
+
       <label for="loaiDuAn">Loại dự án</label>
       <select id="loaiDuAn">
         <option value="">-- Chọn loại --</option>
@@ -101,7 +104,7 @@
       <label for="dienTich">Diện tích (m²)</label>
       <input type="number" id="dienTich" placeholder="Nhập diện tích..." />
 
-      <!-- Nội thất -->
+      <!-- Nhóm: Nội thất -->
       <div id="groupNoiThat" class="group">
         <label for="chatLuong">Chất lượng</label>
         <select id="chatLuong">
@@ -116,12 +119,14 @@
         </select>
 
         <h3>Dịch vụ tùy chọn</h3>
-        <label><input type="checkbox" id="phoiCanh3D" /> Diễn họa phối cảnh 3D</label><br />
+        <label><input type="checkbox" id="phoiCanh3D" /> Diễn họa phối cảnh 3D nội thất</label><br />
         <label><input type="checkbox" id="sanXuatNoiThat" /> Hồ sơ sản xuất nội thất</label><br />
-        <label><input type="checkbox" id="tranTuongSan" /> Hồ sơ trần, tường, sàn</label>
+        <label><input type="checkbox" id="tranTuongSan" /> Hồ sơ trần, tường, sàn</label><br />
+        <label><input type="checkbox" id="dienNuoc" /> Hồ sơ điện, nước</label><br />
+        <label><input type="checkbox" id="dieuHoa" /> Hồ sơ điện nhẹ, điều hòa</label>
       </div>
 
-      <!-- Kiến trúc -->
+      <!-- Nhóm: Kiến trúc -->
       <div id="groupKienTruc" class="group" style="display:none">
         <label for="loaiCongTrinh">Loại công trình</label>
         <select id="loaiCongTrinh">
@@ -134,7 +139,7 @@
         <select id="soMatTien">
           <option value="">-- Chọn số mặt tiền / tầng --</option>
           <option value="1 mặt tiền - 1-3 tầng">1 mặt tiền - 1-3 tầng</option>
-          <option value="1 mặt tiền - 4-5 tầng">1 mặt tiền - 4-5 tầng</option>
+          <option value="2 mặt tiền - 1-3 tầng">2 mặt tiền - 1-3 tầng</option>
         </select>
 
         <label for="phongCachKT">Phong cách kiến trúc</label>
@@ -148,10 +153,11 @@
         <label><input type="checkbox" id="kienTrucPhoiCanh" /> Diễn họa phối cảnh 3D</label><br />
         <label><input type="checkbox" id="kienTrucHS" /> Hồ sơ triển khai kiến trúc</label><br />
         <label><input type="checkbox" id="ketCau" /> Hồ sơ kết cấu</label><br />
-        <label><input type="checkbox" id="dienNuoc" /> Hồ sơ điện nước</label>
+        <label><input type="checkbox" id="dienKienTruc" /> Hồ sơ điện, nước</label><br />
+        <label><input type="checkbox" id="dieuHoaKienTruc" /> Hồ sơ điện nhẹ, điều hòa</label>
       </div>
 
-      <!-- Video 3D -->
+      <!-- Nhóm: Video 3D -->
       <div id="groupVideo3D" class="group" style="display:none">
         <h3>Dịch vụ tùy chọn</h3>
         <label><input type="checkbox" id="video3D" /> Diễn họa video phim 3D</label>
@@ -160,6 +166,7 @@
       <label><input type="checkbox" id="uuDai" /> Thanh toán trước 100% (Ưu đãi 10%)</label>
     </section>
 
+    <!-- Cột phải: Kết quả -->
     <section id="result">
       <h2>Kết quả dự toán</h2>
       <p><strong>Tổng cộng:</strong> <span id="tongCong">0</span> (ngàn VND)</p>
