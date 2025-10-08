@@ -88,3 +88,73 @@ footer {
   background: #fffaf5;
   border-top: 1px solid #e2d8c7;
 }
+/* Bố cục 2 cột */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 1rem 4rem;
+}
+
+/* Khối card */
+.card {
+  background: #f8f5f2;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+/* Tiêu đề */
+.card h2 {
+  font-family: "Inter", sans-serif;
+  color: #222;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* Form cơ bản */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+select, input[type="number"] {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+}
+
+select:focus, input:focus {
+  border-color: #b8926b;
+}
+
+/* Checkbox nhóm */
+.checkbox-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+/* Kết quả */
+#result-section p {
+  font-size: 17px;
+  margin: 12px 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
