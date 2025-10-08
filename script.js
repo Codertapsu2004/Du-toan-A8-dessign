@@ -32,9 +32,13 @@ const data = {
     "Nhà phố - Tân cổ điển - 2 mặt tiền - 1-3 tầng": { dienHoa: "Liên hệ", kienTruc: 40, ketCau: 15, dienNuoc: 15, dieuHoa: 5 },
     "Nhà phố - Tân cổ điển - 2 mặt tiền - 4-5 tầng": { dienHoa: "Liên hệ", kienTruc: 40, ketCau: 15, dienNuoc: 15, dieuHoa: 5 },
 
-    // Biệt thự
-    "Biệt thự - Hiện đại": { dienHoa: 45, kienTruc: 35, ketCau: 20, dienNuoc: 15, dieuHoa: 5 },
-    "Biệt thự - Tân cổ điển": { dienHoa: "Liên hệ", kienTruc: 40, ketCau: 20, dienNuoc: 15, dieuHoa: 5 }
+    // Biệt thự hiện đại
+    "Biệt thự - Hiện đại - 1-3 tầng": { dienHoa: 45000, kienTruc: 35, ketCau: 20, dienNuoc: 15, dieuHoa: 5 },
+    "Biệt thự - Hiện đại - 4-5 tầng": { dienHoa: 50000, kienTruc: 35, ketCau: 20, dienNuoc: 15, dieuHoa: 5 },
+
+    // Biệt thự tân cổ điển
+    "Biệt thự - Tân cổ điển - 1-3 tầng": { dienHoa: "Liên hệ", kienTruc: 40, ketCau: 20, dienNuoc: 15, dieuHoa: 5 },
+    "Biệt thự - Tân cổ điển - 4-5 tầng": { dienHoa: "Liên hệ", kienTruc: 40, ketCau: 20, dienNuoc: 15, dieuHoa: 5 }
   },
 
   // Video 3D
@@ -57,6 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const phongCachKT = document.getElementById("phongCachKT");
   const soMatTien = document.getElementById("soMatTien");
   const dienTich = document.getElementById("dienTich");
+  const groupSoTang = document.getElementById("groupSoTang");
 
   function toggleGroups() {
     document.querySelectorAll(".group").forEach(g => g.style.display = "none");
@@ -65,11 +70,25 @@ window.addEventListener("DOMContentLoaded", () => {
     if (loaiDuAn.value === "video3d") document.getElementById("groupVideo3D").style.display = "block";
   }
 
-  // Ẩn "số mặt tiền" khi chọn Biệt thự
+  // Nếu chọn Biệt thự → ẩn “Số mặt tiền / Số tầng”, thay dropdown riêng
   loaiCongTrinh.addEventListener("change", () => {
-    const groupSoTang = document.getElementById("groupSoTang");
-    if (loaiCongTrinh.value === "Biệt thự") groupSoTang.style.display = "none";
-    else groupSoTang.style.display = "block";
+    if (loaiCongTrinh.value === "Biệt thự") {
+      groupSoTang.querySelector("label").textContent = "Số tầng (Biệt thự)";
+      soMatTien.innerHTML = `
+        <option value="">-- Chọn số tầng --</option>
+        <option value="1-3 tầng">1–3 tầng</option>
+        <option value="4-5 tầng">4–5 tầng</option>
+      `;
+    } else {
+      groupSoTang.querySelector("label").textContent = "Số mặt tiền / Số tầng";
+      soMatTien.innerHTML = `
+        <option value="">-- Chọn số mặt tiền / tầng --</option>
+        <option value="1 mặt tiền - 1-3 tầng">1 mặt tiền - 1–3 tầng</option>
+        <option value="2 mặt tiền - 1-3 tầng">2 mặt tiền - 1–3 tầng</option>
+        <option value="1 mặt tiền - 4-5 tầng">1 mặt tiền - 4–5 tầng</option>
+        <option value="2 mặt tiền - 4-5 tầng">2 mặt tiền - 4–5 tầng</option>
+      `;
+    }
   });
 
   // Cập nhật phong cách nội thất
@@ -112,11 +131,18 @@ window.addEventListener("DOMContentLoaded", () => {
       const loai = loaiCongTrinh.value;
       const style = phongCachKT.value;
       const soTang = soMatTien.value;
-      if (!loai || !style) return updateResult(0, 0, "0%");
-      const key = loai === "Biệt thự" ? `${loai} - ${style}` : `${loai} - ${style} - ${soTang}`;
+      if (!loai || !style || !soTang) return updateResult(0, 0, "0%");
+      const key = loai === "Biệt thự"
+        ? `${loai} - ${style} - ${soTang}`
+        : `${loai} - ${style} - ${soTang}`;
       const info = data.kienTruc[key];
       if (!info) return;
-      const add = (v, checked) => { if (checked) { if (typeof v === "number") tong += v * area; else lienHe = true; } };
+      const add = (v, checked) => {
+        if (checked) {
+          if (typeof v === "number") tong += v * area;
+          else lienHe = true;
+        }
+      };
       add(info.dienHoa, document.getElementById("kienTrucPhoiCanh").checked);
       add(info.kienTruc, document.getElementById("kienTrucHS").checked);
       add(info.ketCau, document.getElementById("ketCau").checked);
@@ -128,7 +154,10 @@ window.addEventListener("DOMContentLoaded", () => {
       const vidCheck = document.getElementById("video3D").checked;
       if (!vidCheck) return updateResult(0, 0, "0%");
       const matched = data.video3D.findLast(v => area >= v.minArea);
-      if (matched) { if (typeof matched.price === "number") tong = matched.price; else lienHe = true; }
+      if (matched) {
+        if (typeof matched.price === "number") tong = matched.price;
+        else lienHe = true;
+      }
     }
 
     const uuDai = document.getElementById("uuDai").checked ? 0.9 : 1;
