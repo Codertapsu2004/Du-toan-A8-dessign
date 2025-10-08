@@ -1,0 +1,140 @@
+let data = {};
+
+async function loadData() {
+  const res = await fetch("data.json");
+  data = await res.json();
+  console.log("✅ Dữ liệu đã tải:", data);
+}
+
+// Khi trang tải xong
+window.addEventListener("DOMContentLoaded", () => {
+  loadData();
+  toggleFields();
+  document.addEventListener("input", calcEstimate);
+  document.getElementById("loaiDuAn").addEventListener("change", toggleFields);
+});
+
+// --- Ẩn/hiện form theo loại dự án ---
+function toggleFields() {
+  const loaiDuAn = document.getElementById("loaiDuAn").value;
+
+  const chatLuong = document.getElementById("chatLuong").closest(".form-group");
+  const phongCach = document.getElementById("phongCach").closest(".form-group");
+  const loaiCongTrinh = document.getElementById("loaiCongTrinh").closest(".form-group");
+  const phongKienTruc = document.getElementById("phongCachKienTruc").closest(".form-group");
+  const soTang = document.getElementById("soTang").closest(".form-group");
+
+  const all = [chatLuong, phongCach, loaiCongTrinh, phongKienTruc, soTang];
+  all.forEach(e => (e.style.display = "none"));
+
+  if (loaiDuAn === "Nội thất") {
+    chatLuong.style.display = "block";
+    phongCach.style.display = "block";
+  } else if (loaiDuAn === "Kiến trúc") {
+    loaiCongTrinh.style.display = "block";
+    phongKienTruc.style.display = "block";
+    soTang.style.display = "block";
+  }
+
+  calcEstimate();
+}
+
+// --- Hàm tính toán báo giá ---
+function calcEstimate() {
+  if (!data.noiThat || !data.kienTruc) return;
+
+  const loaiDuAn = document.getElementById("loaiDuAn").value;
+  const dienTich = parseFloat(document.getElementById("dienTich").value) || 0;
+  let tong = 0;
+  let chiTiet = [];
+
+  // ======== NỘI THẤT ========
+  if (loaiDuAn === "Nội thất") {
+    const chatLuong = document.getElementById("chatLuong").value;
+    const phongCach = document.getElementById("phongCach").value;
+    const key = `Nội thất - ${chatLuong} - ${phongCach}`;
+    const item = data.noiThat[key];
+
+    if (!item) {
+      document.getElementById("tongCong").innerText = "0";
+      document.getElementById("tongCuoi").innerText = "0";
+      return;
+    }
+
+    if (document.getElementById("phoiCanh3D").checked) {
+      const val = item["Đơn giá Diễn họa"] * dienTich;
+      tong += val;
+      chiTiet.push(`Phối cảnh 3D: ${val.toLocaleString()} ngàn`);
+    }
+    if (document.getElementById("sanXuatNoiThat").checked) {
+      const val = item["Đơn giá HS Sản xuất"] * dienTich;
+      tong += val;
+      chiTiet.push(`HS sản xuất: ${val.toLocaleString()} ngàn`);
+    }
+    if (document.getElementById("tranTuongSan").checked) {
+      const val = item["Đơn giá HS TrầnTườngSàn"] * dienTich;
+      tong += val;
+      chiTiet.push(`HS trần/tường/sàn: ${val.toLocaleString()} ngàn`);
+    }
+  }
+
+  // ======== KIẾN TRÚC ========
+  else if (loaiDuAn === "Kiến trúc") {
+    const loaiCongTrinh = document.getElementById("loaiCongTrinh").value;
+    const phongKienTruc = document.getElementById("phongCachKienTruc").value;
+    const soTang = document.getElementById("soTang").value;
+
+    let key = "";
+    if (loaiCongTrinh === "Nhà phố") {
+      key = `Kiến trúc - ${loaiCongTrinh} - ${phongKienTruc} - ${soTang} tầng`;
+    } else {
+      key = `Kiến trúc - ${loaiCongTrinh} - ${phongKienTruc}`;
+    }
+
+    const item = data.kienTruc[key];
+    if (!item) {
+      document.getElementById("tongCong").innerText = "0";
+      document.getElementById("tongCuoi").innerText = "0";
+      return;
+    }
+
+    if (document.getElementById("phoiCanh3D").checked) {
+      const val = item["Đơn giá Diễn họa"] * dienTich;
+      tong += val;
+      chiTiet.push(`Phối cảnh 3D: ${val.toLocaleString()} ngàn`);
+    }
+    if (document.getElementById("kienTruc").checked) {
+      const val = item["Đơn giá HS Kiến trúc"] * dienTich;
+      tong += val;
+      chiTiet.push(`HS kiến trúc: ${val.toLocaleString()} ngàn`);
+    }
+    if (document.getElementById("ketCau").checked) {
+      const val = item["Đơn giá HS Kết cấu"] * dienTich;
+      tong += val;
+      chiTiet.push(`HS kết cấu: ${val.toLocaleString()} ngàn`);
+    }
+  }
+
+  // ======== VIDEO 3D ========
+  if (document.getElementById("video3D").checked) {
+    const videoItem = data.video3D.find(v => dienTich <= v.maxArea);
+    if (videoItem) {
+      tong += videoItem.price;
+      chiTiet.push(`Video 3D: ${videoItem.price.toLocaleString()} ngàn`);
+    }
+  }
+
+  // ======== ƯU ĐÃI ========
+  const uuDai = document.getElementById("uuDai").checked ? 0.9 : 1;
+  const tongCuoi = tong * uuDai;
+
+  document.getElementById("tongCong").innerText = tong.toLocaleString();
+  document.getElementById("uuDaiText").innerText = uuDai === 0.9 ? "10%" : "0%";
+  document.getElementById("tongCuoi").innerText = tongCuoi.toLocaleString();
+
+  // Hiển thị chi tiết
+  const detailsDiv = document.getElementById("resultDetails");
+  detailsDiv.innerHTML = chiTiet.length
+    ? `<ul>${chiTiet.map(i => `<li>${i}</li>`).join("")}</ul>`
+    : "<p>Chọn hạng mục cần tính để xem báo giá.</p>";
+}

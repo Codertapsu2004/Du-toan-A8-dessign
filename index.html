@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Công cụ Dự toán A8 Design</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="assets/logo.png" alt="A8 Design Logo">
+      <h1>CÔNG CỤ DỰ TOÁN A8 DESIGN</h1>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="form-section">
+      <h2>Thông tin dự án</h2>
+
+      <div class="form-group">
+        <label>Loại dự án</label>
+        <select id="loaiDuAn">
+          <option value="">-- Chọn loại dự án --</option>
+          <option value="noithat">Nội thất</option>
+          <option value="kientruc">Kiến trúc</option>
+          <option value="video3d">Video 3D</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Diện tích (m²)</label>
+        <input type="number" id="dienTich" placeholder="Nhập diện tích...">
+      </div>
+
+      <!-- Nội thất -->
+      <div id="groupNoiThat" class="group">
+        <div class="form-group">
+          <label>Chất lượng</label>
+          <select id="chatLuong">
+            <option value="">-- Chọn chất lượng --</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Phong cách</label>
+          <select id="phongCach"></select>
+        </div>
+        <div class="checkboxes">
+          <label><input type="checkbox" id="phoiCanh3D"> Diễn họa phối cảnh 3D</label>
+          <label><input type="checkbox" id="sanXuatNoiThat"> Hồ sơ sản xuất nội thất</label>
+          <label><input type="checkbox" id="tranTuongSan"> Hồ sơ trần, tường, sàn</label>
+        </div>
+      </div>
+
+      <!-- Kiến trúc -->
+      <div id="groupKienTruc" class="group">
+        <div class="form-group">
+          <label>Loại công trình</label>
+          <select id="loaiCongTrinh">
+            <option value="">-- Chọn loại công trình --</option>
+            <option value="Nhà phố">Nhà phố</option>
+            <option value="Biệt thự">Biệt thự</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Phong cách kiến trúc</label>
+          <select id="phongCachKienTruc">
+            <option value="Hiện đại">Hiện đại</option>
+            <option value="Tân cổ điển">Tân cổ điển</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Số tầng</label>
+          <select id="soTang">
+            <option value="1-3 tầng">1–3 tầng</option>
+            <option value="4-5 tầng">4–5 tầng</option>
+          </select>
+        </div>
+        <div class="checkboxes">
+          <label><input type="checkbox" id="kienTrucPhoiCanh"> Diễn họa phối cảnh 3D</label>
+          <label><input type="checkbox" id="kienTrucHS"> Hồ sơ triển khai kiến trúc</label>
+          <label><input type="checkbox" id="ketCau"> Hồ sơ kết cấu</label>
+          <label><input type="checkbox" id="dienNuoc"> Hồ sơ điện nước</label>
+        </div>
+      </div>
+
+      <!-- Video 3D -->
+      <div id="groupVideo3D" class="group">
+        <div class="checkboxes">
+          <label><input type="checkbox" id="video3D"> Diễn họa video phim 3D</label>
+        </div>
+      </div>
+
+      <div class="checkboxes">
+        <label><input type="checkbox" id="uuDai"> Thanh toán trước 100% (Ưu đãi 10%)</label>
+      </div>
+    </section>
+
+    <section class="result-section">
+      <h2>Kết quả dự toán</h2>
+      <p><strong>Tổng cộng:</strong> <span id="tongCong">0</span> (ngàn VND)</p>
+      <p><strong>Ưu đãi:</strong> <span id="uuDaiText">0%</span></p>
+      <p><strong>Chi phí cuối:</strong> <span id="tongCuoi">0</span> (ngàn VND)</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 A8 Design. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
