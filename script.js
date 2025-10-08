@@ -26,7 +26,7 @@ const data = {
   ]
 };
 
-// ======================= ẨN/HIỆN NHÓM FIELD =======================
+// ======================= ẨN/HIỆN NHÓM =======================
 const groups = {
   noithat: document.getElementById("groupNoiThat"),
   kientruc: document.getElementById("groupKienTruc"),
@@ -62,9 +62,7 @@ function updatePhongCach() {
       "Midcentury",
       "Luxury"
     ];
-    list.forEach(pc => {
-      phongCach.innerHTML += `<option value="${pc}">${pc}</option>`;
-    });
+    list.forEach(pc => (phongCach.innerHTML += `<option value="${pc}">${pc}</option>`));
   }
 }
 document.getElementById("chatLuong").addEventListener("change", updatePhongCach);
@@ -72,37 +70,29 @@ document.getElementById("chatLuong").addEventListener("change", updatePhongCach)
 // ======================= TÍNH TOÁN =======================
 const allInputs = document.querySelectorAll("input, select");
 allInputs.forEach(el => el.addEventListener("change", calcEstimate));
-document.getElementById("dienTich").addEventListener("input", calcEstimate); // auto-update khi nhập
+document.getElementById("dienTich").addEventListener("input", calcEstimate);
 
 function calcEstimate() {
   const loai = document.getElementById("loaiDuAn").value;
   const dienTich = parseFloat(document.getElementById("dienTich").value || 0);
   let tong = 0;
 
-  // =================== NỘI THẤT ===================
   if (loai === "noithat") {
     const chatLuong = document.getElementById("chatLuong").value;
     const phongCach = document.getElementById("phongCach").value;
-    const key = `Nội thất - ${chatLuong} - ${phongCach}`;
+    const key = `Nội thất - ${chatLuong.toUpperCase()} - ${phongCach}`;
     const item = data.noiThat[key];
-    if (!item) {
-      updateResult(0, 0, "0%");
-      return;
-    }
+    if (!item) return updateResult(0, 0, "0%");
 
     if (document.getElementById("phoiCanh3D").checked) tong += item.dienHoa * dienTich;
     if (document.getElementById("sanXuatNoiThat").checked) tong += item.sanXuat * dienTich;
     if (document.getElementById("tranTuongSan").checked) tong += item.tranTuongSan * dienTich;
   }
 
-  // =================== KIẾN TRÚC ===================
   if (loai === "kientruc") {
     const loaiCT = document.getElementById("loaiCongTrinh").value;
     const item = data.kienTruc[`Kiến trúc - ${loaiCT}`];
-    if (!item) {
-      updateResult(0, 0, "0%");
-      return;
-    }
+    if (!item) return updateResult(0, 0, "0%");
 
     if (document.getElementById("kienTrucPhoiCanh").checked) tong += item.dienHoa;
     if (document.getElementById("kienTrucHS").checked) tong += item.kienTruc;
@@ -110,38 +100,26 @@ function calcEstimate() {
     if (document.getElementById("dienNuoc").checked) tong += item.dienNuoc;
   }
 
-  // =================== VIDEO 3D (CẬN DƯỚI) ===================
   if (loai === "video3d") {
-    const area = dienTich;
     let item = null;
-
     for (let i = data.video3D.length - 1; i >= 0; i--) {
-      if (area >= data.video3D[i].min) {
+      if (dienTich >= data.video3D[i].min) {
         item = data.video3D[i];
         break;
       }
     }
-
     if (document.getElementById("video3D").checked && item) {
       if (typeof item.price === "number") tong += item.price;
-      else {
-        document.getElementById("tongCong").innerText = "Liên hệ";
-        document.getElementById("tongCuoi").innerText = "Liên hệ";
-        document.getElementById("uuDaiText").innerText = "0%";
-        return;
-      }
+      else return updateResult("Liên hệ", "Liên hệ", "0%");
     }
   }
 
-  // =================== ƯU ĐÃI & KẾT QUẢ ===================
   const uuDai = document.getElementById("uuDai").checked ? 0.9 : 1;
   const tongCuoi = tong * uuDai;
   const uuDaiText = uuDai < 1 ? "10%" : "0%";
-
   updateResult(tong, tongCuoi, uuDaiText);
 }
 
-// ======================= CẬP NHẬT KẾT QUẢ =======================
 function updateResult(tong, tongCuoi, uuDaiText) {
   document.getElementById("tongCong").innerText =
     typeof tong === "number" ? tong.toLocaleString() : tong;
@@ -149,4 +127,3 @@ function updateResult(tong, tongCuoi, uuDaiText) {
     typeof tongCuoi === "number" ? tongCuoi.toLocaleString() : tongCuoi;
   document.getElementById("uuDaiText").innerText = uuDaiText;
 }
-
