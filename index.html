@@ -1,174 +1,117 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Công cụ Dự toán A8 Design</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background-color: #f6f0e8;
-      color: #222;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #fff;
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    header img {
-      width: 48px;
-      height: 48px;
-      margin-right: 16px;
-    }
-    header h1 {
-      font-size: 1.6rem;
-      color: #222;
-      margin: 0;
-      font-weight: 600;
-    }
-    main {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      padding: 40px;
-      flex-wrap: wrap;
-    }
-    section {
-      background: #fff;
-      padding: 25px 35px;
-      border-radius: 14px;
-      flex: 1;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-      max-width: 500px;
-    }
-    h2 {
-      font-size: 1.3rem;
-      border-bottom: 2px solid #c7a97f;
-      padding-bottom: 5px;
-      margin-bottom: 20px;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: 500;
-    }
-    select, input[type="number"], input[type="text"] {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-top: 5px;
-      font-size: 0.95rem;
-    }
-    input[type="checkbox"] {
-      margin-right: 5px;
-      transform: scale(1.2);
-    }
-    #result {
-      margin-top: 25px;
-      line-height: 1.8;
-      font-size: 1rem;
-    }
-    footer {
-      text-align: center;
-      margin: 25px 0;
-      font-size: 0.9rem;
-      color: #666;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CÔNG CỤ DỰ TOÁN A8 DESIGN</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <img src="assets/logo.png" alt="A8 Design Logo" />
+    <img src="assets/logo.png" alt="A8 Design Logo" class="logo">
     <h1>CÔNG CỤ DỰ TOÁN A8 DESIGN</h1>
   </header>
 
   <main>
-    <!-- Cột trái: Thông tin dự án -->
-    <section>
+    <section id="form-section">
       <h2>Thông tin dự án</h2>
+      <hr>
+      <div class="form-group">
+        <label>Loại dự án</label>
+        <select id="loaiDuAn">
+          <option value="">-- Chọn loại --</option>
+          <option value="noithat">Nội thất</option>
+          <option value="kientruc">Kiến trúc</option>
+          <option value="video3d">Video 3D</option>
+        </select>
+      </div>
 
-      <label for="loaiDuAn">Loại dự án</label>
-      <select id="loaiDuAn">
-        <option value="">-- Chọn loại --</option>
-        <option value="noithat">Nội thất</option>
-        <option value="kientruc">Kiến trúc</option>
-        <option value="video3d">Video 3D</option>
-      </select>
+      <div class="form-group">
+        <label>Diện tích (m²)</label>
+        <input type="number" id="dienTich" placeholder="Nhập diện tích...">
+      </div>
 
-      <label for="dienTich">Diện tích (m²)</label>
-      <input type="number" id="dienTich" placeholder="Nhập diện tích..." />
-
-      <!-- Nhóm: Nội thất -->
+      <!-- Nội thất -->
       <div id="groupNoiThat" class="group">
-        <label for="chatLuong">Chất lượng</label>
-        <select id="chatLuong">
-          <option value="">-- Chọn chất lượng --</option>
-          <option value="MEDIUM">Medium</option>
-          <option value="HIGH">High</option>
-        </select>
+        <div class="form-group">
+          <label>Chất lượng</label>
+          <select id="chatLuong">
+            <option value="">-- Chọn chất lượng --</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
+          </select>
+        </div>
 
-        <label for="phongCach">Phong cách (theo chất lượng)</label>
-        <select id="phongCach">
-          <option value="">-- Chọn phong cách --</option>
-        </select>
-
-        <h3>Dịch vụ tùy chọn</h3>
-        <label><input type="checkbox" id="phoiCanh3D" /> Diễn họa phối cảnh 3D nội thất</label><br />
-        <label><input type="checkbox" id="sanXuatNoiThat" /> Hồ sơ sản xuất nội thất</label><br />
-        <label><input type="checkbox" id="tranTuongSan" /> Hồ sơ trần, tường, sàn</label><br />
-        <label><input type="checkbox" id="dienNuoc" /> Hồ sơ điện, nước</label><br />
-        <label><input type="checkbox" id="dieuHoa" /> Hồ sơ điện nhẹ, điều hòa</label>
-      </div>
-
-      <!-- Nhóm: Kiến trúc -->
-      <div id="groupKienTruc" class="group" style="display:none">
-        <label for="loaiCongTrinh">Loại công trình</label>
-        <select id="loaiCongTrinh">
-          <option value="">-- Chọn loại công trình --</option>
-          <option value="Nhà phố">Nhà phố</option>
-          <option value="Biệt thự">Biệt thự</option>
-        </select>
-
-        <label for="soMatTien">Số mặt tiền / Số tầng</label>
-        <select id="soMatTien">
-          <option value="">-- Chọn số mặt tiền / tầng --</option>
-          <option value="1 mặt tiền - 1-3 tầng">1 mặt tiền - 1-3 tầng</option>
-          <option value="2 mặt tiền - 1-3 tầng">2 mặt tiền - 1-3 tầng</option>
-        </select>
-
-        <label for="phongCachKT">Phong cách kiến trúc</label>
-        <select id="phongCachKT">
-          <option value="">-- Chọn phong cách --</option>
-          <option value="Hiện đại">Hiện đại</option>
-          <option value="Tân cổ điển">Tân cổ điển</option>
-        </select>
+        <div class="form-group">
+          <label>Phong cách (theo chất lượng)</label>
+          <select id="phongCach">
+            <option value="">-- Chọn phong cách --</option>
+          </select>
+        </div>
 
         <h3>Dịch vụ tùy chọn</h3>
-        <label><input type="checkbox" id="kienTrucPhoiCanh" /> Diễn họa phối cảnh 3D</label><br />
-        <label><input type="checkbox" id="kienTrucHS" /> Hồ sơ triển khai kiến trúc</label><br />
-        <label><input type="checkbox" id="ketCau" /> Hồ sơ kết cấu</label><br />
-        <label><input type="checkbox" id="dienKienTruc" /> Hồ sơ điện, nước</label><br />
-        <label><input type="checkbox" id="dieuHoaKienTruc" /> Hồ sơ điện nhẹ, điều hòa</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="phoiCanh3D"> Diễn họa phối cảnh 3D</label>
+          <label><input type="checkbox" id="sanXuatNoiThat"> Hồ sơ sản xuất nội thất</label>
+          <label><input type="checkbox" id="tranTuongSan"> Hồ sơ trần, tường, sàn</label>
+          <label><input type="checkbox" id="dienNuoc"> Hồ sơ điện, nước</label>
+          <label><input type="checkbox" id="dieuHoa"> Hồ sơ điện nhẹ, điều hòa</label>
+        </div>
       </div>
 
-      <!-- Nhóm: Video 3D -->
-      <div id="groupVideo3D" class="group" style="display:none">
+      <!-- Kiến trúc -->
+      <div id="groupKienTruc" class="group">
+        <div class="form-group">
+          <label>Loại công trình</label>
+          <select id="loaiCongTrinh">
+            <option value="">-- Chọn loại công trình --</option>
+            <option value="Nhà phố">Nhà phố</option>
+            <option value="Biệt thự">Biệt thự</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Phong cách kiến trúc</label>
+          <select id="phongCachKT">
+            <option value="">-- Chọn phong cách --</option>
+            <option value="Hiện đại">Hiện đại</option>
+            <option value="Tân cổ điển">Tân cổ điển</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="groupSoTang">
+          <label>Số mặt tiền / Số tầng</label>
+          <select id="soMatTien">
+            <option value="">-- Chọn số mặt tiền / tầng --</option>
+            <option value="1 mặt tiền - 1-3 tầng">1 mặt tiền - 1–3 tầng</option>
+            <option value="2 mặt tiền - 1-3 tầng">2 mặt tiền - 1–3 tầng</option>
+            <option value="1 mặt tiền - 4-5 tầng">1 mặt tiền - 4–5 tầng</option>
+            <option value="2 mặt tiền - 4-5 tầng">2 mặt tiền - 4–5 tầng</option>
+          </select>
+        </div>
+
         <h3>Dịch vụ tùy chọn</h3>
-        <label><input type="checkbox" id="video3D" /> Diễn họa video phim 3D</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="kienTrucPhoiCanh"> Diễn họa phối cảnh 3D</label>
+          <label><input type="checkbox" id="kienTrucHS"> Hồ sơ triển khai kiến trúc</label>
+          <label><input type="checkbox" id="ketCau"> Hồ sơ kết cấu</label>
+          <label><input type="checkbox" id="dienKienTruc"> Hồ sơ điện, nước</label>
+          <label><input type="checkbox" id="dieuHoaKienTruc"> Hồ sơ điện nhẹ, điều hòa</label>
+        </div>
       </div>
 
-      <label><input type="checkbox" id="uuDai" /> Thanh toán trước 100% (Ưu đãi 10%)</label>
+      <!-- Video 3D -->
+      <div id="groupVideo3D" class="group">
+        <h3>Dịch vụ tùy chọn</h3>
+        <label><input type="checkbox" id="video3D"> Diễn họa video phim 3D</label>
+      </div>
+
+      <label><input type="checkbox" id="uuDai"> Thanh toán trước 100% (Ưu đãi 10%)</label>
     </section>
 
-    <!-- Cột phải: Kết quả -->
-    <section id="result">
+    <section id="result-section">
       <h2>Kết quả dự toán</h2>
+      <hr>
       <p><strong>Tổng cộng:</strong> <span id="tongCong">0</span> (ngàn VND)</p>
       <p><strong>Ưu đãi:</strong> <span id="uuDaiText">0%</span></p>
       <p><strong>Chi phí cuối:</strong> <span id="tongCuoi">0</span> (ngàn VND)</p>
