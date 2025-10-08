@@ -6,6 +6,7 @@
   <title>Công cụ Dự Toán A8 Design</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <header class="header">
     <img src="assets/logo.png" alt="A8 Design Logo" class="logo" />
@@ -13,7 +14,7 @@
   </header>
 
   <main class="container">
-    <!-- ===== CỘT TRÁI: THÔNG TIN DỰ ÁN ===== -->
+    <!-- CỘT TRÁI -->
     <section class="input-section">
       <h2>Thông tin dự án</h2>
       <hr />
@@ -29,7 +30,7 @@
       <label for="dienTich">Diện tích (m²)</label>
       <input type="number" id="dienTich" placeholder="Nhập diện tích..." />
 
-      <!-- ======= Nhóm Nội thất ======= -->
+      <!-- Nội thất -->
       <div id="groupNoiThat" class="group">
         <label for="chatLuong">Chất lượng</label>
         <select id="chatLuong">
@@ -49,7 +50,7 @@
         <label><input type="checkbox" id="tranTuongSan" /> Hồ sơ trần, tường, sàn</label>
       </div>
 
-      <!-- ======= Nhóm Kiến trúc ======= -->
+      <!-- Kiến trúc -->
       <div id="groupKienTruc" class="group">
         <label for="loaiCongTrinh">Loại công trình</label>
         <select id="loaiCongTrinh">
@@ -65,23 +66,21 @@
         <label><input type="checkbox" id="dienNuoc" /> Hồ sơ điện nước</label>
       </div>
 
-      <!-- ======= Nhóm Video 3D ======= -->
+      <!-- Video 3D -->
       <div id="groupVideo3D" class="group">
         <h3>Dịch vụ tùy chọn</h3>
         <label><input type="checkbox" id="video3D" /> Diễn họa video phim 3D</label>
       </div>
 
-      <!-- ======= Ưu đãi ======= -->
       <div class="discount">
         <label><input type="checkbox" id="uuDai" /> Thanh toán trước 100% (Ưu đãi 10%)</label>
       </div>
     </section>
 
-    <!-- ===== CỘT PHẢI: KẾT QUẢ DỰ TOÁN ===== -->
+    <!-- CỘT PHẢI -->
     <section class="result-section">
       <h2>Kết quả dự toán</h2>
       <hr />
-
       <p><strong>Tổng cộng:</strong> <span id="tongCong">0</span> (ngàn VND)</p>
       <p><strong>Ưu đãi:</strong> <span id="uuDaiText">0%</span></p>
       <p><strong>Chi phí cuối:</strong> <span id="tongCuoi">0</span> (ngàn VND)</p>
