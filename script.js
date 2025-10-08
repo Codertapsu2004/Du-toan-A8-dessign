@@ -1,3 +1,4 @@
+// ================== DỮ LIỆU GIÁ ==================
 const data = {
   noiThat: {
     // Medium Quality
@@ -35,12 +36,13 @@ const data = {
   ]
 };
 
-// Ẩn/hiện nhóm chọn theo loại dự án
+// ================== ẨN/HIỆN NHÓM DỰ ÁN ==================
 const groups = {
   noithat: document.getElementById("groupNoiThat"),
   kientruc: document.getElementById("groupKienTruc"),
   video3d: document.getElementById("groupVideo3D")
 };
+
 Object.values(groups).forEach(g => (g.style.display = "none"));
 
 document.getElementById("loaiDuAn").addEventListener("change", e => {
@@ -51,29 +53,35 @@ document.getElementById("loaiDuAn").addEventListener("change", e => {
   calcEstimate();
 });
 
+// ================== CẬP NHẬT PHONG CÁCH ==================
 function updatePhongCach() {
   const chatLuong = document.getElementById("chatLuong").value;
   const phongCach = document.getElementById("phongCach");
   phongCach.innerHTML = "<option value=''>-- Chọn phong cách --</option>";
+
   if (chatLuong === "MEDIUM") {
     phongCach.innerHTML += `<option value="Văn phòng hiện đại">Văn phòng hiện đại</option>`;
     phongCach.innerHTML += `<option value="Hiện đại cao cấp">Hiện đại cao cấp</option>`;
   } else if (chatLuong === "HIGH") {
     const list = ["Color block","Tropical","Đồng Gia","Scandinavian","Industrial","Midcentury","Neoclassic","Contemporary","Luxury"];
-    list.forEach(pc => phongCach.innerHTML += `<option value="${pc}">${pc}</option>`);
+    list.forEach(pc => (phongCach.innerHTML += `<option value="${pc}">${pc}</option>`));
   }
 }
+document.getElementById("chatLuong").addEventListener("change", updatePhongCach);
 
+// ================== LẮNG NGHE SỰ KIỆN ==================
 document.querySelectorAll("input, select").forEach(el => {
   el.addEventListener("input", calcEstimate);
   el.addEventListener("change", calcEstimate);
 });
 
+// ================== TÍNH TOÁN CHI PHÍ ==================
 function calcEstimate() {
   const loai = document.getElementById("loaiDuAn").value;
   const dienTich = parseFloat(document.getElementById("dienTich").value || 0);
   let tong = 0;
 
+  // ----- NỘI THẤT -----
   if (loai === "noithat") {
     const cl = document.getElementById("chatLuong").value;
     const pc = document.getElementById("phongCach").value;
@@ -87,6 +95,7 @@ function calcEstimate() {
     if (document.getElementById("dieuHoa").checked) tong += item.dieuHoa * dienTich;
   }
 
+  // ----- KIẾN TRÚC -----
   if (loai === "kientruc") {
     const loaiCT = document.getElementById("loaiCongTrinh").value;
     const soMat = document.getElementById("soMatTien").value;
@@ -102,6 +111,7 @@ function calcEstimate() {
     if (document.getElementById("dieuHoaKienTruc").checked) tong += item.dieuHoa;
   }
 
+  // ----- VIDEO 3D -----
   if (loai === "video3d") {
     let item = data.video3D[0];
     for (let i = data.video3D.length - 1; i >= 0; i--) {
@@ -122,6 +132,7 @@ function calcEstimate() {
   updateResult(tong, tongCuoi, uuDaiText);
 }
 
+// ================== HIỂN THỊ KẾT QUẢ ==================
 function updateResult(tong, tongCuoi, uuDaiText) {
   document.getElementById("tongCong").innerText =
     typeof tong === "number" ? tong.toLocaleString() : tong;
@@ -129,3 +140,4 @@ function updateResult(tong, tongCuoi, uuDaiText) {
     typeof tongCuoi === "number" ? tongCuoi.toLocaleString() : tongCuoi;
   document.getElementById("uuDaiText").innerText = uuDaiText;
 }
+
