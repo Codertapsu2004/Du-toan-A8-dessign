@@ -1,147 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f8f4ef;
-  color: #2b2b2b;
   margin: 0;
-  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f2ec;
+  color: #333;
 }
 
-header {
+/* Header */
+.header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 20px;
-  background-color: #fffaf5;
-  border-bottom: 2px solid #e2d8c7;
+  gap: 15px;
+  padding: 20px 60px;
+  background-color: #f0e8e3;
+  border-bottom: 2px solid #e0d4c7;
+}
+
+.header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1d1d1d;
 }
 
 .logo {
-  width: 60px;
-  height: auto;
+  height: 50px;
 }
 
-h1 {
-  font-size: 1.8em;
-  color: #1e1e1e;
-}
-
+/* Container layout */
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  padding: 40px;
-}
-
-section {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  padding: 25px 30px;
-  flex: 1;
-}
-
-h2 {
-  font-size: 1.3em;
-  color: #3b3b3b;
-  margin-bottom: 10px;
-}
-
-hr {
-  border: 1px solid #e2d8c7;
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-top: 10px;
-  font-weight: 500;
-}
-
-input, select {
   width: 100%;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
 }
 
-.group {
-  margin-top: 10px;
-  display: none;
-}
-
-.discount {
-  margin-top: 15px;
-}
-
-.result-section {
-  text-align: left;
-  font-size: 1.1em;
-}
-
-footer {
-  text-align: center;
-  font-size: 0.9em;
-  color: #555;
-  padding: 20px;
-  background: #fffaf5;
-  border-top: 1px solid #e2d8c7;
-}
-/* Bố cục 2 cột */
+/* Grid chia 2 cột */
 .main-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  padding: 1rem 4rem;
+  align-items: start;
 }
 
-/* Khối card */
+/* Card style */
 .card {
-  background: #f8f5f2;
-  padding: 2rem;
+  background: #fff;
   border-radius: 20px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  padding: 2rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
 }
 
 /* Tiêu đề */
-.card h2 {
-  font-family: "Inter", sans-serif;
-  color: #222;
-  font-weight: 700;
-  margin-bottom: 10px;
+h2 {
+  margin-top: 0;
+  color: #1d1d1d;
+  border-left: 5px solid #c8a97e;
+  padding-left: 10px;
 }
 
-/* Form cơ bản */
+h3 {
+  color: #3b2d1f;
+  margin-top: 1.5rem;
+}
+
+/* Form group */
 .form-group {
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
 }
 
-.form-group label {
+label {
   font-weight: 600;
   margin-bottom: 4px;
-  color: #333;
 }
 
-select, input[type="number"] {
+input[type="number"], select {
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 15px;
+}
+
+input:focus, select:focus {
+  border-color: #c8a97e;
   outline: none;
 }
 
-select:focus, input:focus {
-  border-color: #b8926b;
-}
-
-/* Checkbox nhóm */
+/* Checkbox */
 .checkbox-group label {
   display: block;
-  margin-bottom: 6px;
-  color: #444;
+  margin: 6px 0;
+  font-weight: 400;
 }
 
 /* Kết quả */
@@ -150,11 +107,19 @@ select:focus, input:focus {
   margin: 12px 0;
 }
 
-/* Responsive */
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #f0e8e3;
+  color: #666;
+  margin-top: 40px;
+  border-top: 1px solid #e0d4c7;
+}
+
+/* Responsive: thu nhỏ về 1 cột */
 @media (max-width: 900px) {
   .main-grid {
     grid-template-columns: 1fr;
   }
 }
-
-
