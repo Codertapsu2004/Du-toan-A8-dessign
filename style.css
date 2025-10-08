@@ -1,66 +1,90 @@
 body {
   font-family: 'Poppins', sans-serif;
-  background: #f8f5ef;
-  color: #222;
-  line-height: 1.6;
+  background-color: #f8f4ef;
+  color: #2b2b2b;
   margin: 0;
-  padding: 0 20px;
+  padding: 0;
 }
 
-.logo-title {
+header {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 20px 0;
+  padding: 20px;
+  background-color: #fffaf5;
+  border-bottom: 2px solid #e2d8c7;
 }
-.logo-title img {
+
+.logo {
   width: 60px;
+  height: auto;
 }
+
 h1 {
-  color: #1a1a1a;
-  font-weight: 600;
+  font-size: 1.8em;
+  color: #1e1e1e;
 }
-h2 {
-  color: #3a3a3a;
-  font-weight: 500;
-  border-bottom: 2px solid #b89143;
-  display: inline-block;
-  padding-bottom: 4px;
-}
+
 .container {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
   gap: 40px;
+  padding: 40px;
 }
+
 section {
-  flex: 1;
-  min-width: 320px;
-  background: white;
-  padding: 20px;
+  background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  padding: 25px 30px;
+  flex: 1;
 }
-.form-group {
-  margin: 12px 0;
+
+h2 {
+  font-size: 1.3em;
+  color: #3b3b3b;
+  margin-bottom: 10px;
 }
+
+hr {
+  border: 1px solid #e2d8c7;
+  margin-bottom: 15px;
+}
+
 label {
+  display: block;
+  margin-top: 10px;
   font-weight: 500;
 }
+
 input, select {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
+  padding: 8px 10px;
   border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
 }
-.checkboxes {
+
+.group {
   margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  display: none;
 }
+
+.discount {
+  margin-top: 15px;
+}
+
+.result-section {
+  text-align: left;
+  font-size: 1.1em;
+}
+
 footer {
   text-align: center;
+  font-size: 0.9em;
+  color: #555;
   padding: 20px;
-  color: #777;
+  background: #fffaf5;
+  border-top: 1px solid #e2d8c7;
 }
